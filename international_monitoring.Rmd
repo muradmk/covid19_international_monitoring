@@ -12,15 +12,17 @@ knitr::opts_chunk$set(echo = F)
 source("scripts/international_monitoring.R")
 ```
 
-## Key Highlights:
+
 
 The current 28-day reporting interval is ending in `r current_interval`.
 
 The previous 28-day reporting interval is ending in `r previous_interval`.
 
-## Data:
+# Key Highlights{.tabset}
 
-### Case Increases (Region Level)
+## Region Overview
+
+### Case Increases:
 
 ```{r, results='asis'}
 # Convert the result vector to a bullet list format
@@ -36,11 +38,6 @@ writeLines(bullet_list, sep = "
 ")
 ```
 
-
-
-
-
-
 #### The change in case counts in the last 28-day reporting interval relative to the previous 28-day interval for each of the WHO regions is shown below:
 
 ```{r message=FALSE, , echo=FALSE}
@@ -52,12 +49,10 @@ if (nrow(df_reg_case)<=1){
 
 ```
 
+$~$
+$~$
 
-
-
-
-
-### Death Increases (Region Level)
+### Death Increases:
 
 ```{r, results='asis'}
 # Convert the result vector to a bullet list format
@@ -72,7 +67,6 @@ writeLines(bullet_list, sep = "
 ")
 ```
 
-
 #### The regions that have experienced an increase of \>1% in death counts in the last 28-day reporting interval relative to the previous 28-day interval (if any) are shown below:
 
 ```{r message=FALSE,  echo=FALSE, warning=FALSE}
@@ -83,12 +77,15 @@ if (nrow(df_reg_death)<=1){
 }
 ```
 
+$~$
 
+$~$
 
+$~$
 
+## Country Overview
 
-
-### Case Increases (Country Level)
+### Case Increases:
 
 `r country_case_list`
 
@@ -105,7 +102,6 @@ writeLines(bullet_list, sep = "
 ")
 ```
 
-
 #### The countries that have experienced an increase of \>20% in case counts in the last 28-day reporting interval relative to the previous 28-day interval are shown below:
 
 ```{r , echo=FALSE}
@@ -116,12 +112,10 @@ if (nrow(df_case)<=1){
 }
 ```
 
+$~$
+$~$
 
-
-
-
-
-### Death Increases (Country Level)
+### Death Increases:
 
 `r country_death_list`
 
@@ -138,7 +132,6 @@ writeLines(bullet_list, sep = "
 ")
 ```
 
-
 #### The countries that have experienced an increase of \>20% in case counts in the last 28-day reporting interval relative to the previous 28-day interval are shown below:
 
 ```{r, echo=FALSE}
@@ -149,25 +142,29 @@ if (nrow(df_death)<=1){
 }
 ```
 
+$~$
 
+$~$
 
+$~$
 
-
-
-## Variant Distributions:
+## Variant Distributions
 
 ### In countries with case increases:
 
-Lineage distributions, over the past 8 months, in countries that have experienced an increase of \>20% in case counts in the last 28-day reporting interval relative to the previous 28-day interval are shown below.
+Lineage distributions, over the past 3 months, in countries that have experienced an increase of \>20% in case counts in the last 28-day reporting interval relative to the previous 28-day interval are shown below.
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
 plotAllLineagesByLocation_case_inc(n_month = 3)
 ```
 
+$~$
+$~$
+
 ### In countries with death increases:
 
-Lineage distributions, over the past 8 months, in countries that have experienced an increase of \>20% in death counts in the last 28-day reporting interval relative to the previous 28-day interval are shown below.
+Lineage distributions, over the past 3 months, in countries that have experienced an increase of \>20% in death counts in the last 28-day reporting interval relative to the previous 28-day interval are shown below.
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE, results = 'hide'}
 plotAllLineagesByLocation_death_inc(n_month = 3)
 ```

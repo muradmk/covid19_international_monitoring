@@ -13,7 +13,7 @@ case_inc_country <- function(region_cases){
     line <- c()
     
     for (j in seq_along(countries)) {
-      line[j] <- paste0(countries[j], " (", perc_inc[j], "; ", case_new," new cases", ")")
+      line[j] <- paste0(countries[j], " (", perc_inc[j], "; ", case_new[j]," new cases", ")")
     }
     
     stat <- paste0("In the ", i, " WHO region, there are ", nrow(wtv), " countries with case increases of 20% or more.",
@@ -36,7 +36,7 @@ death_inc_country <- function(region_death){
     line <- c()
     
     for (j in seq_along(countries)) {
-      line[j] <- paste0(countries[j], " (", perc_inc[j], "; ", case_new," new deaths", ")")
+      line[j] <- paste0(countries[j], " (", perc_inc[j], "; ", case_new[j]," new deaths", ")")
     }
     
     stat <- paste0("In the ", i, " WHO region, there are ", nrow(wtv), " countries with case increases of 20% or more.",
@@ -149,7 +149,7 @@ plotAllLineagesByLocation_case_inc <- function(n_month = 6, n_seq = 500){for(i i
           axis.title = element_blank(), 
           plot.caption = element_text(size = 18))+ 
     ggtitle(paste0("Lineage prevalence in ", str_to_title(i), " over the past ", n_month," months."))+
-    labs(subtitle = paste0("Limited to countries that have reported >", n_seq, " sequences."))
+    labs(subtitle = paste0("Limited to countries that have reported >", n_seq, " sequences in that time period."))
   print(p)
 }
 }
@@ -199,7 +199,7 @@ plotAllLineagesByLocation_death_inc <- function(n_month = 6, n_seq = 500){for(i 
           axis.title = element_blank(), 
           plot.caption = element_text(size = 18))+ 
     ggtitle(paste0("Lineage prevalence in ", str_to_title(i), " over the past ", n_month," months."))+
-    labs(subtitle = paste0("Limited to countries that have reported >", n_seq, " sequences."))
+    labs(subtitle = paste0("Limited to countries that have reported >", n_seq, " sequences in that time period."))
   print(p)
 }
 }
