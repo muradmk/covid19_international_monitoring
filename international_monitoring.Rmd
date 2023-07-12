@@ -37,6 +37,8 @@ writeLines(bullet_list, sep = "
            
 ")
 ```
+$~$
+
 
 #### The change in case counts in the last 28-day reporting interval relative to the previous 28-day interval for each of the WHO regions is shown below:
 
@@ -66,8 +68,10 @@ writeLines(bullet_list, sep = "
            
 ")
 ```
+$~$
 
-#### The regions that have experienced an increase of \>1% in death counts in the last 28-day reporting interval relative to the previous 28-day interval (if any) are shown below:
+
+#### The change in death counts in the last 28-day reporting interval relative to the previous 28-day interval for each of the WHO regions is shown below:
 
 ```{r message=FALSE,  echo=FALSE, warning=FALSE}
 if (nrow(df_reg_death)<=1){
@@ -101,6 +105,8 @@ writeLines(bullet_list, sep = "
            
 ")
 ```
+$~$
+
 
 #### The countries that have experienced an increase of \>20% in case counts in the last 28-day reporting interval relative to the previous 28-day interval are shown below:
 
@@ -121,7 +127,7 @@ $~$
 
 ```{r message=FALSE, warning=FALSE, results='asis'}
 # Convert the result vector to a bullet list format
-bullet_list <- map_chr(death_inc_region(region_death), function(item) {
+bullet_list <- map_chr(death_inc_country(region_death), function(item) {
   glue("- {item}")
 })
 
@@ -131,14 +137,16 @@ writeLines(bullet_list, sep = "
            
 ")
 ```
+$~$
 
-#### The countries that have experienced an increase of \>20% in case counts in the last 28-day reporting interval relative to the previous 28-day interval are shown below:
+
+#### The countries that have experienced an increase of \>20% in death counts in the last 28-day reporting interval relative to the previous 28-day interval are shown below:
 
 ```{r, echo=FALSE}
 if (nrow(df_death)<=1){
   cat(paste(bullet_list, collapse = "\n"))
 } else {
-  column_spec(kable(as.data.frame(df_death %>% mutate(Region = WHO_region, Deaths = Deaths_quadriweekly, Deaths_prev = Deaths_PreviousWeek, Perc_chng = death_perc_change) %>% select(Country, Region, Deaths, Deaths_prev, Perc_chng)), col.names = c("Country", "Region", "Cases", "Prior Cases", "% Change"), format = "html", align = "lcccr"), column = 1:5, width = "4cm")
+  column_spec(kable(as.data.frame(df_death %>% mutate(Region = WHO_region, Deaths = Deaths_quadriweekly, Deaths_prev = Deaths_PreviousWeek, Perc_chng = death_perc_change) %>% select(Country, Region, Deaths, Deaths_prev, Perc_chng)), col.names = c("Country", "Region", "Deaths", "Prior Deaths", "% Change"), format = "html", align = "lcccr"), column = 1:5, width = "4cm")
 }
 ```
 
@@ -152,10 +160,10 @@ $~$
 
 ### In countries with case increases:
 
-Lineage distributions, over the past 3 months, in countries that have experienced an increase of \>20% in case counts in the last 28-day reporting interval relative to the previous 28-day interval are shown below.
+Lineage distributions, over the past 6 months, in countries that have experienced an increase of \>20% in case counts in the last 28-day reporting interval relative to the previous 28-day interval are shown below.
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
-plotAllLineagesByLocation_case_inc(n_month = 3)
+```{r echo=FALSE, out.width="100%", results='asis'}
+plotAllLineagesByLocation_case_inc(n_month = 6, n_seq = 500)
 ```
 
 $~$
@@ -163,8 +171,8 @@ $~$
 
 ### In countries with death increases:
 
-Lineage distributions, over the past 3 months, in countries that have experienced an increase of \>20% in death counts in the last 28-day reporting interval relative to the previous 28-day interval are shown below.
+Lineage distributions, over the past 6 months, in countries that have experienced an increase of \>20% in death counts in the last 28-day reporting interval relative to the previous 28-day interval are shown below.
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, results = 'hide'}
-plotAllLineagesByLocation_death_inc(n_month = 3)
+```{r echo=FALSE, out.width="100%", results='asis'}
+plotAllLineagesByLocation_death_inc(n_month = 6, n_seq = 500)
 ```
